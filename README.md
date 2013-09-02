@@ -33,7 +33,7 @@ If you don't set `$prefix`, the framework will try to use your child class name.
 Usage
 -----
 
-Then, whenever you need to set, get, or update settings use these inherited class functions:
+Here are the basic functions available to you within your plugin. 
 
 ### add_setting($option_name, $value)
 
