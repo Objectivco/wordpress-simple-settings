@@ -55,7 +55,7 @@ Gets an HTML field name.  If you set `$type` to array, the field value will be t
 
 ### the_nonce()
 
-Call this somewhere in your admin form to generate the nonce used to save settings.
+Call `$YourPluginInstance->the_nonce()` somewhere in your admin form to generate the nonce used to validate / save settings.
 
 ### save_settings()
 
