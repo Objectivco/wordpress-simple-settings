@@ -1,8 +1,26 @@
 <?php
+/**
+ * WordPress Simple Settings
+ *
+ * A simple framework for managing WordPress plugin settings.
+ *
+ * @author Clifton H. Griffin II
+ * @version 0.1
+ * @copyright Clif Griffin Development, Inc. 2013
+ * @license GNU GPL version 3 (or later) {@see license.txt}
+ **/
 abstract class WordPress_SimpleSettings {
 	var $settings = array();
 	var $prefix;
 
+	/**
+	 * Constructor
+	 *
+	 * @author Clifton H. Griffin II
+	 * @since 0.1
+	 *
+	 * @return void
+	 **/
 	public function __construct() {
 		// Set a default prefix
 		if( function_exists('get_called_class') && empty($this->prefix) ) $this->prefix = get_called_class();
@@ -11,42 +29,98 @@ abstract class WordPress_SimpleSettings {
 		add_action('admin_init', array($this, 'save_settings') );
 	}
 
-	public function add_setting ( $option = false, $newvalue ) {
-		if($option === false ) return false;
+	/**
+	 * Add a new setting
+	 *
+	 * @author Clifton H. Griffin II
+	 * @since 0.1
+	 *
+	 * @param string $setting The name of the new option
+	 * @param string $value The value of the new option
+	 * @return boolean True if successful, false otherwise
+	 **/
+	public function add_setting ( $setting = false, $value ) {
+		if($setting === false ) return false;
 
-		if ( ! isset($this->settings[$option]) ) {
-			return $this->update_setting($option, $newvalue);
+		if ( ! isset($this->settings[$setting]) ) {
+			return $this->update_setting($setting, $value);
 		} else return false;
 	}
 
-	public function update_setting ( $option = false, $newvalue ) {
-		if( $option === false ) return false;
+	/**
+	 * Updates or adds a setting
+	 *
+	 * @author Clifton H. Griffin II
+	 * @since 0.1
+	 *
+	 * @param string $setting The name of the option
+	 * @param string $value The new value of the option
+	 * @return boolean True if successful, false if not
+	 **/
+	public function update_setting ( $setting = false, $value ) {
+		if( $setting === false ) return false;
 
 		$this->settings = $this->get_settings_obj($this->prefix);
-		$this->settings[$option] = $newvalue;
+		$this->settings[$setting] = $value;
 		return $this->set_settings_obj($this->settings);
 	}
 
-	public function get_setting ( $option = false, $type = 'string' ) {
-		if($option === false || ! isset($this->settings[$option]) ) return false;
-		
-		$value = $this->settings[$option];
-		
+	/**
+	 * Retrieves a setting value
+	 *
+	 * @author Clifton H. Griffin II
+	 * @since 0.1
+	 *
+	 * @param string $setting The name of the option
+	 * @param string $type The return format preferred, string or array. Default: string
+	 * @return mixed The value of the setting
+	 **/
+	public function get_setting ( $setting = false, $type = 'string' ) {
+		if($setting === false || ! isset($this->settings[$setting]) ) return false;
+
+		$value = $this->settings[$setting];
+
 		if( strtolower($type) == 'array' ) {
 			$value = (array)explode(";", $value);
 		}
 
-		return apply_filters($thix->prefix . '_get_setting', $value, $option);
+		return apply_filters($thix->prefix . '_get_setting', $value, $setting);
 	}
 
+	/**
+	 * Generates HTML field name for a particular setting
+	 *
+	 * @author Clifton H. Griffin II
+	 * @since 0.1
+	 *
+	 * @param string $setting The name of the setting
+	 * @param string $type The return format of the field, string or array. Default: string
+	 * @return string The name of the field
+	 **/
 	public function get_field_name($setting, $type = 'string') {
 		return "{$this->prefix}_setting[$setting][$type]";
 	}
 
+	/**
+	 * Prints nonce for admin form
+	 *
+	 * @author Clifton H. Griffin II
+	 * @since 0.1
+	 *
+	 * @return void
+	 **/
 	public function the_nonce() {
 		wp_nonce_field( "save_{$this->prefix}_settings", "{$this->prefix}_save" );
 	}
 
+	/**
+	 * Saves settings
+	 *
+	 * @author Clifton H. Griffin II
+	 * @since 0.1
+	 *
+	 * @return void
+	 **/
 	public function save_settings()
 	{
 		if( isset($_REQUEST["{$this->prefix}_setting"]) && check_admin_referer("save_{$this->prefix}_settings","{$this->prefix}_save") ) {
@@ -61,15 +135,30 @@ abstract class WordPress_SimpleSettings {
 					}
 				}
 			}
-
-			add_action('admin_notices', array($this, 'saved_admin_notice') );
 		}
 	}
 
+	/**
+	 * Gets settings object
+	 *
+	 * @author Clifton H. Griffin II
+	 * @since 0.1
+	 *
+	 * @return void
+	 **/
 	public function get_settings_obj () {
 		return get_option("{$this->prefix}_settings", false);
 	}
 
+	/**
+	 * Sets settings object
+	 *
+	 * @author Clifton H. Griffin II
+	 * @since 0.1
+	 *
+	 * @param array $newobj The new settings object
+	 * @return boolean True if successful, false otherwise
+	 **/
 	public function set_settings_obj ( $newobj ) {
 		return update_option("{$this->prefix}_settings", $newobj);
 	}
