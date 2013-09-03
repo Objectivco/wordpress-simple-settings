@@ -7,7 +7,9 @@ Author: Clif Griffin Development Inc.
 Author URI: http://cgd.io
 */
 
-require('inc/wordpress-simple-settings.php'); // include the framework
+// Include the framework only if another plugin has not already done so
+if ( ! class_exists('WordPress_SimpleSettings') )
+	require('inc/wordpress-simple-settings.php'); 
 
 class AwesomePlugin extends WordPress_SimpleSettings {
 	var $prefix = 'awesome'; // this is super recommended
