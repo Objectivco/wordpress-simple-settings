@@ -121,8 +121,7 @@ abstract class WordPress_SimpleSettings {
 	 *
 	 * @return void
 	 **/
-	public function save_settings()
-	{
+	public function save_settings() {
 		if( isset($_REQUEST["{$this->prefix}_setting"]) && check_admin_referer("save_{$this->prefix}_settings","{$this->prefix}_save") ) {
 			$new_settings = $_REQUEST["{$this->prefix}_setting"];
 
