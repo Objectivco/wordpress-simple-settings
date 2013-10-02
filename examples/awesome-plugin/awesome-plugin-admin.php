@@ -30,6 +30,15 @@ global $AwesomePlugin; // we'll need this below
 </pre>
 					</td>
 				</tr>
+				<tr>
+					<th scope="row" valign="top">Favorite Checkbox</th>
+					<td>
+						<label>
+							<input type="hidden" name="<?php echo $AwesomePlugin->get_field_name('favorite_checkbox'); ?>" value="no" />
+							<input type="checkbox" name="<?php echo $AwesomePlugin->get_field_name('favorite_checkbox'); ?>" value="yes" <?php if ( $AwesomePlugin->get_setting('favorite_checkbox') == "yes") echo 'checked="checked"'; ?> />	Check this box, son!
+						</label>
+					</td>
+				</tr>	
 			</tbody>
     	</table>
     	<input class="button-primary" type="submit" value="Save Settings" />
