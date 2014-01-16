@@ -5,7 +5,7 @@
  * A simple framework for managing WordPress plugin settings.
  *
  * @author Clifton H. Griffin II
- * @version 0.1
+ * @version 0.2
  * @copyright Clif Griffin Development, Inc. 2013
  * @license GNU GPL version 3 (or later) {@see license.txt}
  **/
@@ -62,6 +62,7 @@ abstract class WordPress_SimpleSettings {
 
 		$this->settings = $this->get_settings_obj($this->prefix);
 		$this->settings[$setting] = $value;
+
 		return $this->set_settings_obj($this->settings);
 	}
 
@@ -80,11 +81,11 @@ abstract class WordPress_SimpleSettings {
 
 		$value = $this->settings[$setting];
 
-		if( strtolower($type) == 'array' ) {
+		if( strtolower($type) == 'array' && ! empty($value) ) {
 			$value = (array)explode(";", $value);
 		}
 
-		return apply_filters($thix->prefix . '_get_setting', $value, $setting);
+		return apply_filters($this->prefix . '_get_setting', $value, $setting);
 	}
 
 	/**
@@ -121,21 +122,24 @@ abstract class WordPress_SimpleSettings {
 	 *
 	 * @return void
 	 **/
-	public function save_settings()
-	{
+	public function save_settings() {
 		if( isset($_REQUEST["{$this->prefix}_setting"]) && check_admin_referer("save_{$this->prefix}_settings","{$this->prefix}_save") ) {
 			$new_settings = $_REQUEST["{$this->prefix}_setting"];
 
 			foreach( $new_settings as $setting_name => $setting_value  ) {
 				foreach( $setting_value as $type => $value ) {
 					if( $type == "array" ) {
-						$this->update_setting($setting_name, (array)explode(";", $value) );
+						if ( ! is_array($value) && ! empty($value) ) $value = (array)explode(";", $value);
+
+						$this->update_setting($setting_name, $value);
 					} else {
 						$this->update_setting($setting_name, $value);
 					}
 				}
 			}
 		}
+
+		do_action("{$this->prefix}_settings_saved");
 	}
 
 	/**

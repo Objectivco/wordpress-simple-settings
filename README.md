@@ -30,6 +30,18 @@ The gist is, you'll instantiate your plugin class as extension of `WP_SimpleSett
 
 If you don't set `$prefix`, the framework will try to use your child class name.  But this will only work in PHP 5.3+.  So, really, just set a prefix ok?
 
+Change Log
+--------
+
+### 0.2
+
+	- Improves storage and handling of array values.
+	- Adds do_action("{$this->prefix}_settings_saved") hook for adding your own actions after plugin settings are saved. 
+
+### 0.1
+
+Initial version.
+
 Usage
 -----
 
