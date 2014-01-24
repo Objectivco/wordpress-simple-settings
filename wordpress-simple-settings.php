@@ -5,7 +5,7 @@
  * A simple framework for managing WordPress plugin settings.
  *
  * @author Clifton H. Griffin II
- * @version 0.2
+ * @version 0.2.1
  * @copyright Clif Griffin Development, Inc. 2013
  * @license GNU GPL version 3 (or later) {@see license.txt}
  **/
@@ -137,9 +137,9 @@ abstract class WordPress_SimpleSettings {
 					}
 				}
 			}
-		}
 
-		do_action("{$this->prefix}_settings_saved");
+			do_action("{$this->prefix}_settings_saved");
+		}
 	}
 
 	/**

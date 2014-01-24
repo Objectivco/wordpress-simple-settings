@@ -32,7 +32,8 @@ If you don't set `$prefix`, the framework will try to use your child class name.
 
 Change Log
 --------
-
+### 0.2.1
+	- Fix location of {$this->prefix}_settings_saved action to prevent inappropriate firing.
 ### 0.2
 
 	- Improves storage and handling of array values.
