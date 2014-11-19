@@ -32,19 +32,18 @@ If you don't set `$prefix`, the framework will try to use your child class name.
 
 Change Log
 --------
+
 ### 0.2.2
-- Added `delete_setting`. 
-- 
+- Added delete_setting.
+
 ### 0.2.1
 - Fix location of {$this->prefix}_settings_saved action to prevent inappropriate firing.
 
 ### 0.2
-
 - Improves storage and handling of array values.
 - Adds do_action("{$this->prefix}_settings_saved") hook for adding your own actions after plugin settings are saved. 
 
 ### 0.1
-
 - Initial version.
 
 Usage
