@@ -5,7 +5,7 @@
  * A simple framework for managing WordPress plugin settings.
  *
  * @author Clifton H. Griffin II
- * @version 0.2.1
+ * @version 0.2.2
  * @copyright Clif Griffin Development, Inc. 2013
  * @license GNU GPL version 3 (or later) {@see license.txt}
  **/
@@ -62,6 +62,24 @@ abstract class WordPress_SimpleSettings {
 
 		$this->settings = $this->get_settings_obj($this->prefix);
 		$this->settings[$setting] = $value;
+
+		return $this->set_settings_obj($this->settings);
+	}
+
+	/**
+	 * Deletes a setting
+	 *
+	 * @author Clifton H. Griffin II
+	 * @since 0.1
+	 *
+	 * @param string $setting The name of the option
+	 * @return boolean True if successful, false if not
+	 **/
+	public function delete_setting ( $setting = false ) {
+		if( $setting === false ) return false;
+
+		$this->settings = $this->get_settings_obj($this->prefix);
+		unset($this->settings[$setting]);
 
 		return $this->set_settings_obj($this->settings);
 	}

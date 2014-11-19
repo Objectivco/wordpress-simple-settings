@@ -32,6 +32,8 @@ If you don't set `$prefix`, the framework will try to use your child class name.
 
 Change Log
 --------
+### 0.2.2
+- Added `delete_setting`. 
 ### 0.2.1
 	- Fix location of {$this->prefix}_settings_saved action to prevent inappropriate firing.
 ### 0.2
@@ -53,6 +55,10 @@ Here are the basic functions available to you within your plugin.
 This is essentially a wrapper for `update_setting` that respectfully does not make any changes if the option in question is already set. 
 
 You'll most frequently use this in your activation hook. 
+
+### delete_setting($option_name)
+
+Removes setting.
 
 ### get_setting($option_name, $type)
 
