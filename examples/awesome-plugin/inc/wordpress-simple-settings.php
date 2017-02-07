@@ -5,13 +5,14 @@
  * A simple framework for managing WordPress plugin settings.
  *
  * @author Clifton H. Griffin II
- * @version 0.2.2
- * @copyright Clif Griffin Development, Inc. 2013
+ * @version 0.3
+ * @copyright Clif Griffin Development, Inc. 2013-2017
  * @license GNU GPL version 3 (or later) {@see license.txt}
  **/
 abstract class WordPress_SimpleSettings {
 	var $settings = array();
 	var $prefix;
+	var $delimeter;
 
 	/**
 	 * Constructor
@@ -24,6 +25,9 @@ abstract class WordPress_SimpleSettings {
 	public function __construct() {
 		// Set a default prefix
 		if( function_exists('get_called_class') && empty($this->prefix) ) $this->prefix = get_called_class();
+
+		// Set a default delimeter for separated values
+		if ( empty($this->delimeter) ) $this->delimeter = ";";
 
 		$this->settings = $this->get_settings_obj( $this->prefix );
 		add_action('admin_init', array($this, 'save_settings') );
@@ -100,7 +104,7 @@ abstract class WordPress_SimpleSettings {
 		$value = $this->settings[$setting];
 
 		if( strtolower($type) == 'array' && ! empty($value) ) {
-			$value = (array)explode(";", $value);
+			$value = (array)explode($this->delimeter, $value);
 		}
 
 		return apply_filters($this->prefix . '_get_setting', $value, $setting);
@@ -147,7 +151,7 @@ abstract class WordPress_SimpleSettings {
 			foreach( $new_settings as $setting_name => $setting_value  ) {
 				foreach( $setting_value as $type => $value ) {
 					if( $type == "array" ) {
-						if ( ! is_array($value) && ! empty($value) ) $value = (array)explode(";", $value);
+						if ( ! is_array($value) && ! empty($value) ) $value = (array)explode($this->delimeter, $value);
 
 						$this->update_setting($setting_name, $value);
 					} else {
