@@ -26,7 +26,7 @@ abstract class WordPress_SimpleSettings {
 		// Set a default prefix
 		if( function_exists('get_called_class') && empty($this->prefix) ) $this->prefix = get_called_class();
 
-		// Set a default delimeter for comma separated values
+		// Set a default delimeter for separated values
 		if ( empty($this->delimeter) ) $this->delimeter = ";";
 
 		$this->settings = $this->get_settings_obj( $this->prefix );
