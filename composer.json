@@ -1,0 +1,16 @@
+{
+    "name": "objectivco/wordpress-simple-settings",
+    "description": "A minimalist framework for managing WordPress plugin or theme settings.",
+    "type": "library",
+    "require": {
+        "php": ">=5.2.0"
+    },
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Clifton Griffin",
+            "email": "clif@objectiv.co"
+        }
+    ],
+    "minimum-stability": "stable"
+}
