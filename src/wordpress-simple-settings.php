@@ -5,8 +5,8 @@
  * A simple framework for managing WordPress plugin settings.
  *
  * @author Clifton H. Griffin II
- * @version 0.3
- * @copyright Clif Griffin Development, Inc. 2013-2017
+ * @version 0.4
+ * @copyright Objectiv 2013-2017
  * @license GNU GPL version 3 (or later) {@see license.txt}
  **/
 abstract class WordPress_SimpleSettings {
@@ -170,7 +170,7 @@ abstract class WordPress_SimpleSettings {
 	 * @author Clifton H. Griffin II
 	 * @since 0.1
 	 *
-	 * @return void
+	 * @return array The settings array 
 	 **/
 	public function get_settings_obj () {
 		return get_option("{$this->prefix}_settings", false);
