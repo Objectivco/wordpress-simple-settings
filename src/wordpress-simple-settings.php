@@ -5,7 +5,7 @@
  * A simple framework for managing WordPress plugin settings.
  *
  * @author Clifton H. Griffin II
- * @version 0.4
+ * @version 0.5
  * @copyright Objectiv 2013-2017
  * @license GNU GPL version 3 (or later) {@see license.txt}
  **/
@@ -148,6 +148,9 @@ abstract class WordPress_SimpleSettings {
 		if( isset($_REQUEST["{$this->prefix}_setting"]) && check_admin_referer("save_{$this->prefix}_settings","{$this->prefix}_save") ) {
 			$new_settings = $_REQUEST["{$this->prefix}_setting"];
 
+			// Strip Magic Slashes
+			$new_settings = stripslashes_deep( $new_settings );
+
 			foreach( $new_settings as $setting_name => $setting_value  ) {
 				foreach( $setting_value as $type => $value ) {
 					if( $type == "array" ) {
@@ -170,7 +173,7 @@ abstract class WordPress_SimpleSettings {
 	 * @author Clifton H. Griffin II
 	 * @since 0.1
 	 *
-	 * @return array The settings array 
+	 * @return array The settings array
 	 **/
 	public function get_settings_obj () {
 		return get_option("{$this->prefix}_settings", false);
