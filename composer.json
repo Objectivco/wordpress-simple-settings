@@ -6,7 +6,7 @@
     "require": {
         "php": ">=5.2.0"
     },
-    "license": "GPL-3.0+",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Clifton Griffin",
