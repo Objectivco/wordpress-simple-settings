@@ -5,7 +5,7 @@
  * A simple framework for managing WordPress plugin settings.
  *
  * @author Clifton H. Griffin II
- * @version 0.5
+ * @version 0.6
  * @copyright Objectiv 2013-2017
  * @license GNU GPL version 3 (or later) {@see license.txt}
  **/
@@ -13,6 +13,7 @@ abstract class WordPress_SimpleSettings {
 	var $settings = array();
 	var $prefix;
 	var $delimeter;
+	var $network_only = false;
 
 	/**
 	 * Constructor
@@ -176,7 +177,11 @@ abstract class WordPress_SimpleSettings {
 	 * @return array The settings array
 	 **/
 	public function get_settings_obj () {
-		return get_option("{$this->prefix}_settings", false);
+		if ( $this->network_only ) {
+			return get_site_option("{$this->prefix}_settings", false);
+		} else {
+			return get_option("{$this->prefix}_settings", false);
+		}
 	}
 
 	/**
@@ -189,6 +194,10 @@ abstract class WordPress_SimpleSettings {
 	 * @return boolean True if successful, false otherwise
 	 **/
 	public function set_settings_obj ( $newobj ) {
-		return update_option("{$this->prefix}_settings", $newobj);
+		if ( $this->network_only ) {
+			return update_site_option("{$this->prefix}_settings", $newobj);
+		} else {
+			return update_option("{$this->prefix}_settings", $newobj);
+		}
 	}
 }
