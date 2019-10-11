@@ -157,9 +157,9 @@ abstract class WordPress_SimpleSettings {
 					if( $type == "array" ) {
 						if ( ! is_array($value) && ! empty($value) ) $value = (array)explode($this->delimeter, $value);
 
-						$this->update_setting($setting_name, $value);
+						$this->update_setting($setting_name, sanitize_text_field($value));
 					} else {
-						$this->update_setting($setting_name, $value);
+						$this->update_setting($setting_name, sanitize_text_field($value));
 					}
 				}
 			}
