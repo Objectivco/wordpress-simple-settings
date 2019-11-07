@@ -35,6 +35,9 @@ If you don't set `$prefix`, the framework will try to use your child class name.
 
 Change Log
 --------
+### 0.7.2
+- Pass NULL as old value if there isn't an old value.
+
 ### 0.7.1
 - WordPress coding standards
 - Don't save to db for reach setting on save_settings(). Defer to the end.
