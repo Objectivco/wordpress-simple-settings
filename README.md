@@ -35,6 +35,12 @@ If you don't set `$prefix`, the framework will try to use your child class name.
 
 Change Log
 --------
+### 0.7.1
+- WordPress coding standards
+- Don't save to db for reach setting on save_settings(). Defer to the end.
+- Add action {$this->prefix}_update_setting_{$setting} that receives the old and new values during setting update.
+- Ignore .idea folder
+
 ### 0.3.0
 - Added $delimeter variable to allow switching array delimeter from semi-colon (default) to something else.
 
