@@ -5,7 +5,7 @@
  * A simple framework for managing WordPress plugin settings.
  *
  * @author Clifton H. Griffin II
- * @version 0.7
+ * @version 0.7.0
  * @copyright Objectiv 2013-2017
  * @license GNU GPL version 3 (or later) {@see license.txt}
  **/
@@ -19,7 +19,7 @@ abstract class WordPress_SimpleSettings {
 	 * Constructor
 	 *
 	 * @author Clifton H. Griffin II
-	 * @since 0.1
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 **/
@@ -43,7 +43,7 @@ abstract class WordPress_SimpleSettings {
 	 * Add a new setting
 	 *
 	 * @author Clifton H. Griffin II
-	 * @since 0.1
+	 * @since 0.1.0
 	 *
 	 * @param string|bool $setting The name of the new option
 	 * @param string $value The value of the new option
@@ -66,7 +66,7 @@ abstract class WordPress_SimpleSettings {
 	 *
 	 * @return boolean True if successful, false if not
 	 * @author Clifton H. Griffin II
-	 * @since 0.1
+	 * @since 0.1.0
 	 *
 	 */
 	public function update_setting( $setting, $value, $save_to_db = true ) {
@@ -112,7 +112,7 @@ abstract class WordPress_SimpleSettings {
 	 * Retrieves a setting value
 	 *
 	 * @author Clifton H. Griffin II
-	 * @since 0.1
+	 * @since 0.1.0
 	 *
 	 * @param string $setting The name of the option
 	 * @param string $type The return format preferred, string or array. Default: string
@@ -136,7 +136,7 @@ abstract class WordPress_SimpleSettings {
 	 * Generates HTML field name for a particular setting
 	 *
 	 * @author Clifton H. Griffin II
-	 * @since 0.1
+	 * @since 0.1.0
 	 *
 	 * @param string $setting The name of the setting
 	 * @param string $type The return format of the field, string or array. Default: string
@@ -150,7 +150,7 @@ abstract class WordPress_SimpleSettings {
 	 * Prints nonce for admin form
 	 *
 	 * @author Clifton H. Griffin II
-	 * @since 0.1
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 **/
@@ -162,7 +162,7 @@ abstract class WordPress_SimpleSettings {
 	 * Saves settings
 	 *
 	 * @author Clifton H. Griffin II
-	 * @since 0.1
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 **/
@@ -197,7 +197,7 @@ abstract class WordPress_SimpleSettings {
 	 * Gets settings object
 	 *
 	 * @author Clifton H. Griffin II
-	 * @since 0.1
+	 * @since 0.1.0
 	 *
 	 * @return array The settings array
 	 **/
@@ -213,7 +213,7 @@ abstract class WordPress_SimpleSettings {
 	 * Sets settings object
 	 *
 	 * @author Clifton H. Griffin II
-	 * @since 0.1
+	 * @since 0.1.0
 	 *
 	 * @param array $newobj The new settings object
 	 * @return boolean True if successful, false otherwise
