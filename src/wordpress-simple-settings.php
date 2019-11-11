@@ -5,7 +5,7 @@
  * A simple framework for managing WordPress plugin settings.
  *
  * @author Clifton H. Griffin II
- * @version 0.7.2
+ * @version 0.7.3
  * @copyright Objectiv 2013-2017
  * @license GNU GPL version 3 (or later) {@see license.txt}
  **/
@@ -74,7 +74,6 @@ abstract class WordPress_SimpleSettings {
 			return false;
 		}
 
-		$this->settings             = $this->get_settings_obj();
 		$old_value                  = isset( $this->settings[ $setting ] ) ? $this->settings[ $setting ] : NULL;
 		$this->settings[ $setting ] = $value;
 
@@ -102,7 +101,6 @@ abstract class WordPress_SimpleSettings {
 			return false;
 		}
 
-		$this->settings = $this->get_settings_obj();
 		unset( $this->settings[ $setting ] );
 
 		return $this->set_settings_obj( $this->settings );
